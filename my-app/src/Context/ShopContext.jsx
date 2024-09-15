@@ -12,15 +12,16 @@ const getDefaultCart = ()=>{
  }
   
 const ShopContextProvider =(props) =>{
+    const url = "https://shopping-app-backebd.onrender.com"
     const [cartItems, setCartItems] = useState(getDefaultCart());
     const [all_product, setAll_Product] = useState([])
       
     useEffect(()=>{
-        fetch('http://localhost:4000/allproducts')
+        fetch(`${url}/allproducts`)
         .then((response)=>response.json()).then((data)=>{setAll_Product(data)})
 
         if(localStorage.getItem('auth-token')){
-            fetch('http://localhost:4000/getcart',{
+            fetch(`${url}/getcart`,{
                 method:"POST",
                 headers:{
                   Accept:'application/form-data',
@@ -36,7 +37,7 @@ const ShopContextProvider =(props) =>{
     const addToCart = (itemId)=>{
      setCartItems((prev)=>({...prev,[itemId] : prev[itemId]+1}));
        if(localStorage.getItem('auth-token')){
-        fetch('http://localhost:4000/addtocart',{
+        fetch(`${url}/addtocart`,{
             method:"POST",
             headers:{
               Accept:'application/form-data',
@@ -52,7 +53,7 @@ const ShopContextProvider =(props) =>{
     const removeFromCart = (itemId)=>{
          setCartItems((prev)=>({...prev,[itemId]:prev[itemId]-1}));
          if(localStorage.getItem('auth-token')){
-            fetch('http://localhost:4000/removefromcart',{
+            fetch(`${url}/removefromcart`,{
                 method:"POST",
                 headers:{
                   Accept:'application/form-data',
