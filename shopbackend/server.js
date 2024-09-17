@@ -42,9 +42,10 @@ app.use('/images', express.static('upload/images'))
 
 //creating upload endpoint for image
 app.post("/upload", upload.single('product'), (req, res)=>{
+  const baseURL = process.env.BASE_URL || `${req.protocol}://${req.get('host')}`;
  res.json({
     success: 1,
-    image_url:`http://localhost:${PORT}/images/${req.file.filename}`
+    image_url: `${baseURL}/images/${req.file.filename}`
  })
 })
 
