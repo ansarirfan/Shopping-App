@@ -4,11 +4,11 @@ import "./NewCollection.css"
 import Item from "../Item/Item"
 
 const NewCollectiopn = () => {
-
+const url = "https://shopping-app-backebd.onrender.com";
   const [new_collection, setNew_collection] = useState([]);
   
   useEffect(()=>{
-    fetch('http://localhost:4000/newCollection')
+    fetch(`${url}/newCollection`)
     .then((response)=>response.json()).then((data)=>{setNew_collection(data)})
 },[])
 
