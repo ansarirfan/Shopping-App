@@ -18,7 +18,7 @@ const Listproducts = () => {
 
   //for remove product
   const removeProduct = async (id)=>{
-    await fetch(`${url}/deleteproduct`',{
+    await fetch(`${url}/deleteproduct`,{
       method:"POST",
       headers:{
         Accept:'application/json',
