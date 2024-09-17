@@ -4,9 +4,10 @@ import "./Popular.css"
 import Item from '../Item/Item'
 
 const Popular = () => {
+  const url = "https://shopping-app-backebd.onrender.com";
   const [popularProduct, setPopluarProduct] = useState([]);
   useEffect(()=>{
-    fetch('http://localhost:4000/popularinwomen')
+    fetch(`${url}/popularinwomen`)
     .then((response)=>response.json()).then((data)=>{setPopluarProduct(data)})
 },[])
 
