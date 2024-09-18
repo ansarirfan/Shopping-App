@@ -11,12 +11,12 @@ const { error, log } = require('console');
 
 
 app.use(express.json());
-app.use(cors()) 
+// app.use(cors()) 
+app.use(cors({
+  origin: '*', // Or specify the frontend domain, e.g., 'http://localhost:4000'
+}));
 
 //database connect with mongodb
-
-
-// mongoose.connect('mongodb+srv://shopAnsari:merashop@cluster0.uenasnl.mongodb.net/e-commerce');
 mongoose.connect(process.env.DATABASE_URL)
 .then(() => console.log('Connected to MongoDB'))
 .catch(err => console.error('MongoDB connection error:', err));
@@ -38,7 +38,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage:storage})
 // static
-app.use('/images', express.static('upload/images'))
+// app.use('/images', express.static('upload/images'))
+
+app.use('/images', express.static(path.join(__dirname, 'upload/images')));
+
 
 //creating upload endpoint for image
 app.post("/upload", upload.single('product'), (req, res)=>{
